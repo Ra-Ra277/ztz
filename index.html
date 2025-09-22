@@ -11,17 +11,20 @@
   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
   <style>
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
+      --primary: #4f6df5;
+      --primary-dark: #3a56e0;
+      --primary-light: #eef1ff;
       --secondary: #1f2937;
       --light: #f9fafb;
       --dark: #111827;
+      --accent: #6366f1;
     }
     
     body {
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
       color: var(--secondary);
+      background-color: #fafbff;
     }
     
     /* Navbar styling */
@@ -35,6 +38,27 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       padding: 0.5rem 0;
+    }
+    
+    .nav-link {
+      color: var(--secondary) !important;
+      font-weight: 500;
+      position: relative;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 100%;
     }
     
     /* Hero section with parallax */
@@ -143,6 +167,7 @@
       position: relative;
       margin-bottom: 3rem;
       font-weight: 700;
+      color: var(--primary-dark);
     }
     
     .section-title:after {
@@ -161,7 +186,7 @@
     .category-card {
       transition: all 0.4s ease;
       border: none;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       background: white;
@@ -169,7 +194,7 @@
     
     .category-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 15px 35px rgba(79, 109, 245, 0.15);
     }
     
     .category-icon {
@@ -184,19 +209,20 @@
     /* Product cards */
     .product-card {
       border: none;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       transition: all 0.4s ease;
+      background: white;
     }
     
     .product-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 15px 35px rgba(79, 109, 245, 0.15);
     }
     
     .product-image {
-      height: 200px;
+      height: 220px;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
@@ -209,10 +235,12 @@
     .best-seller {
       position: relative;
       overflow: hidden;
+      background: var(--primary-light);
+      padding: 80px 0;
     }
     
     .best-seller-image {
-      border-radius: 12px;
+      border-radius: 16px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
       transition: all 0.5s ease;
     }
@@ -223,7 +251,7 @@
     
     /* Services section */
     .services {
-      background: linear-gradient(135deg, var(--secondary), var(--dark));
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: white;
       position: relative;
       overflow: hidden;
@@ -252,7 +280,8 @@
     
     /* Newsletter */
     .newsletter {
-      background: var(--light);
+      background: var(--primary-light);
+      padding: 80px 0;
     }
     
     .newsletter-input {
@@ -260,6 +289,7 @@
       padding: 15px 20px;
       border-radius: 50px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      width: 100%;
     }
     
     .newsletter-btn {
@@ -269,6 +299,7 @@
       background: var(--primary);
       color: white;
       transition: all 0.3s ease;
+      white-space: nowrap;
     }
     
     .newsletter-btn:hover {
@@ -302,8 +333,17 @@
       50% {
         transform: translateY(-20px) rotate(10deg);
       }
-      100% {
+      to {
         transform: translateY(0) rotate(0deg);
+      }
+    }
+    
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(calc(-250px * 7));
       }
     }
     
@@ -315,6 +355,175 @@
       width: 100%;
       height: 100%;
       z-index: -1;
+    }
+    
+    /* Button hover effects */
+    .btn-hover-effect {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      z-index: 1;
+      border: none;
+    }
+    
+    .btn-hover-effect:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.3s;
+      z-index: -1;
+    }
+    
+    .btn-hover-effect:hover:after {
+      width: 100%;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+    
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .btn-outline-primary:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Carousel styling */
+    .carousel-container {
+      position: relative;
+      padding: 0 50px;
+    }
+    
+    .carousel-control-prev, .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: 0.8;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .carousel-control-prev {
+      left: 0;
+    }
+    
+    .carousel-control-next {
+      right: 0;
+    }
+    
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+      opacity: 1;
+      background: var(--primary-dark);
+    }
+    
+    /* Best seller product selection */
+    .product-selection {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 15px 0;
+      scrollbar-width: thin;
+    }
+    
+    .product-selection-item {
+      flex: 0 0 auto;
+      width: 100px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .product-selection-item img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    
+    .product-selection-item p {
+      margin-top: 8px;
+      font-size: 0.8rem;
+    }
+    
+    .product-selection-item:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-selection-item.active img {
+      border: 2px solid var(--primary);
+    }
+    
+    /* Infinite scrolling banner */
+    .infinite-banner {
+      background: linear-gradient(90deg, rgba(79, 109, 245, 0.1), rgba(58, 86, 224, 0.1), rgba(239, 241, 255, 0.1));
+      padding: 40px 0;
+      overflow: hidden;
+      position: relative;
+      margin: 80px 0;
+    }
+    
+    .infinite-track {
+      display: flex;
+      width: calc(250px * 14);
+      animation: scroll 30s linear infinite;
+    }
+    
+    .infinite-item {
+      width: 220px;
+      height: 140px;
+      margin: 0 15px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+    
+    .infinite-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(79, 109, 245, 0.2);
+    }
+    
+    .infinite-content {
+      text-align: center;
+      color: var(--primary-dark);
+    }
+    
+    .infinite-content i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .infinite-content h6 {
+      font-weight: 600;
+      margin: 0;
+      font-size: 0.9rem;
     }
     
     /* Responsive adjustments */
@@ -329,6 +538,20 @@
       
       .floating-element {
         display: none;
+      }
+      
+      .carousel-container {
+        padding: 0 20px;
+      }
+      
+      .carousel-control-prev, .carousel-control-next {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .infinite-item {
+        width: 180px;
+        height: 120px;
       }
     }
   </style>
@@ -368,8 +591,8 @@
     <h1 class="hero-title">Temukan & Jual Desain <span class="text-warning">UI/UX</span> Terbaik</h1>
     <p class="hero-subtitle">Temukan desain yang tepat untuk proyek Anda dengan kategori yang telah kami organisir dengan rapi.</p>
     <div class="hero-buttons">
-      <a href="#" class="btn btn-light me-2 rounded-pill px-4 py-2">Get it</a>
-      <a href="#" class="btn btn-outline-light rounded-pill px-4 py-2">Contact Us</a>
+      <a href="#" class="btn btn-light me-2 rounded-pill px-4 py-2 btn-hover-effect">Get it</a>
+      <a href="#" class="btn btn-outline-light rounded-pill px-4 py-2 btn-hover-effect">Contact Us</a>
     </div>
   </div>
   
@@ -455,92 +678,304 @@
   </div>
 </section>
 
-<!-- Produk Pilihan -->
+<!-- Infinite Scrolling Banner -->
+<div class="infinite-banner">
+  <div class="infinite-track">
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-lightning-charge"></i>
+        <h6>Fast Delivery</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-shield-check"></i>
+        <h6>Secure Payment</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-arrow-repeat"></i>
+        <h6>Free Revisions</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-headset"></i>
+        <h6>24/7 Support</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-award"></i>
+        <h6>Premium Quality</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-people"></i>
+        <h6>User Centered</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-palette2"></i>
+        <h6>Modern Design</h6>
+      </div>
+    </div>
+    <!-- Duplicate for seamless loop -->
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-lightning-charge"></i>
+        <h6>Fast Delivery</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-shield-check"></i>
+        <h6>Secure Payment</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-arrow-repeat"></i>
+        <h6>Free Revisions</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-headset"></i>
+        <h6>24/7 Support</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-award"></i>
+        <h6>Premium Quality</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-people"></i>
+        <h6>User Centered</h6>
+      </div>
+    </div>
+    <div class="infinite-item">
+      <div class="infinite-content">
+        <i class="bi bi-palette2"></i>
+        <h6>Modern Design</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Produk Pilihan dengan Carousel -->
 <section class="py-5 bg-light" style="padding-top: 100px; padding-bottom: 100px;">
   <div class="container">
     <h2 class="section-title fw-bold text-center mb-5">Desain Pilihan Kami</h2>
-    <div class="row g-4">
-      <div class="col-md-4 col-lg-3">
-        <div class="card product-card h-100">
-          <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
-          <div class="card-body">
-            <h6 class="fw-bold">E-commerce Dashboard</h6>
-            <p class="text-muted">UI/UX terbaik untuk bisnis Anda</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="fw-bold text-primary mb-0">$4500</p>
-              <div>
-                <i class="bi bi-star-fill text-warning"></i>
-                <span class="text-muted">4.9</span>
+    
+    <div class="carousel-container">
+      <div id="designCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row g-4">
+              <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                  <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
+                  <div class="card-body">
+                    <h6 class="fw-bold">E-commerce Dashboard</h6>
+                    <p class="text-muted">UI/UX terbaik untuk bisnis Anda</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold text-primary mb-0">$4500</p>
+                      <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted">4.9</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-100 mt-3 rounded-pill btn-hover-effect">Get it</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                  <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
+                  <div class="card-body">
+                    <h6 class="fw-bold">Mobile Banking App</h6>
+                    <p class="text-muted">UI/UX modern untuk aplikasi perbankan</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold text-primary mb-0">$3800</p>
+                      <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted">4.8</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-100 mt-3 rounded-pill btn-hover-effect">Get it</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                  <img src="https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
+                  <div class="card-body">
+                    <h6 class="fw-bold">Travel Booking UI</h6>
+                    <p class="text-muted">Desain booking perjalanan yang intuitif</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold text-primary mb-0">$5200</p>
+                      <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted">5.0</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-100 mt-3 rounded-pill btn-hover-effect">Get it</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                  <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
+                  <div class="card-body">
+                    <h6 class="fw-bold">Fitness App Design</h6>
+                    <p class="text-muted">UI/UX untuk aplikasi kebugaran</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold text-primary mb-0">$3200</p>
+                      <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted">4.7</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-100 mt-3 rounded-pill btn-hover-effect">Get it</a>
+                  </div>
+                </div>
               </div>
             </div>
-            <a href="#" class="btn btn-dark w-100 mt-3 rounded-pill">Get it</a>
           </div>
-        </div>
-      </div>
-      
-      <div class="col-md-4 col-lg-3">
-        <div class="card product-card h-100">
-          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
-          <div class="card-body">
-            <h6 class="fw-bold">Mobile Banking App</h6>
-            <p class="text-muted">UI/UX modern untuk aplikasi perbankan</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="fw-bold text-primary mb-0">$3800</p>
-              <div>
-                <i class="bi bi-star-fill text-warning"></i>
-                <span class="text-muted">4.8</span>
+          
+          <div class="carousel-item">
+            <div class="row g-4">
+              <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                  <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
+                  <div class="card-body">
+                    <h6 class="fw-bold">Social Media Dashboard</h6>
+                    <p class="text-muted">Dashboard untuk media sosial</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold text-primary mb-0">$4200</p>
+                      <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted">4.8</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-100 mt-3 rounded-pill btn-hover-effect">Get it</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                  <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
+                  <div class="card-body">
+                    <h6 class="fw-bold">Food Delivery App</h6>
+                    <p class="text-muted">UI/UX untuk aplikasi pengiriman makanan</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold text-primary mb-0">$3600</p>
+                      <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted">4.9</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-100 mt-3 rounded-pill btn-hover-effect">Get it</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                  <img src="https://images.unsplash.com/photo-1616587226157-48e49175ee20?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
+                  <div class="card-body">
+                    <h6 class="fw-bold">Real Estate Website</h6>
+                    <p class="text-muted">Desain website untuk properti</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold text-primary mb-0">$4800</p>
+                      <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted">4.7</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-100 mt-3 rounded-pill btn-hover-effect">Get it</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                  <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
+                  <div class="card-body">
+                    <h6 class="fw-bold">Education Platform</h6>
+                    <p class="text-muted">Platform e-learning dengan UI menarik</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold text-primary mb-0">$5400</p>
+                      <div>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted">5.0</span>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-primary w-100 mt-3 rounded-pill btn-hover-effect">Get it</a>
+                  </div>
+                </div>
               </div>
             </div>
-            <a href="#" class="btn btn-dark w-100 mt-3 rounded-pill">Get it</a>
           </div>
         </div>
-      </div>
-      
-      <div class="col-md-4 col-lg-3">
-        <div class="card product-card h-100">
-          <img src="https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
-          <div class="card-body">
-            <h6 class="fw-bold">Travel Booking UI</h6>
-            <p class="text-muted">Desain booking perjalanan yang intuitif</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="fw-bold text-primary mb-0">$5200</p>
-              <div>
-                <i class="bi bi-star-fill text-warning"></i>
-                <span class="text-muted">5.0</span>
-              </div>
-            </div>
-            <a href="#" class="btn btn-dark w-100 mt-3 rounded-pill">Get it</a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-md-4 col-lg-3">
-        <div class="card product-card h-100">
-          <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" class="card-img-top product-image" alt="project">
-          <div class="card-body">
-            <h6 class="fw-bold">Fitness App Design</h6>
-            <p class="text-muted">UI/UX untuk aplikasi kebugaran</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="fw-bold text-primary mb-0">$3200</p>
-              <div>
-                <i class="bi bi-star-fill text-warning"></i>
-                <span class="text-muted">4.7</span>
-              </div>
-            </div>
-            <a href="#" class="btn btn-dark w-100 mt-3 rounded-pill">Get it</a>
-          </div>
-        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#designCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#designCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Best Seller -->
-<section class="py-5 best-seller" style="padding-top: 100px; padding-bottom: 100px;">
+<!-- Best Seller dengan Pilihan Produk -->
+<section class="best-seller">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-md-6">
         <img src="https://images.unsplash.com/photo-1551909497-da19a4dfba32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80" class="img-fluid best-seller-image" alt="" data-tilt>
+        
+        <!-- Pilihan produk di bawah gambar best seller -->
+        <div class="mt-4">
+          <h5 class="fw-bold mb-3">Pilihan Produk Lainnya</h5>
+          <div class="product-selection">
+            <div class="product-selection-item active">
+              <img src="https://images.unsplash.com/photo-1551909497-da19a4dfba32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Product 1">
+              <p>Fashion</p>
+            </div>
+            <div class="product-selection-item">
+              <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Product 2">
+              <p>Banking</p>
+            </div>
+            <div class="product-selection-item">
+              <img src="https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Product 3">
+              <p>Travel</p>
+            </div>
+            <div class="product-selection-item">
+              <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Product 4">
+              <p>Fitness</p>
+            </div>
+            <div class="product-selection-item">
+              <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80" alt="Product 5">
+              <p>Social</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-md-6">
         <span class="badge bg-primary rounded-pill px-3 py-2">Best Seller</span>
@@ -561,8 +996,8 @@
         <h4 class="text-primary">$129.99 <del class="text-muted fs-6">$179.99</del></h4>
         
         <div class="d-flex mt-4">
-          <button class="btn btn-dark me-2 rounded-pill px-4 py-2">Add to cart</button>
-          <button class="btn btn-outline-dark rounded-pill px-4 py-2">Buy now</button>
+          <button class="btn btn-primary me-2 rounded-pill px-4 py-2 btn-hover-effect">Add to cart</button>
+          <button class="btn btn-outline-primary rounded-pill px-4 py-2 btn-hover-effect">Buy now</button>
         </div>
         
         <div class="mt-4">
@@ -619,20 +1054,20 @@
       </div>
     </div>
     
-    <a href="#" class="btn btn-light mt-5 rounded-pill px-4 py-2">View All Services</a>
+    <a href="#" class="btn btn-light mt-5 rounded-pill px-4 py-2 btn-hover-effect">View All Services</a>
   </div>
 </section>
 
 <!-- Newsletter -->
-<section class="py-5 newsletter" style="padding-top: 100px; padding-bottom: 100px;">
+<section class="newsletter">
   <div class="container text-center">
     <h2 class="section-title fw-bold">Subscribe our newsletter</h2>
     <p class="text-muted mb-5">We connect you with the best properties, with the best service too.</p>
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="input-group">
+      <div class="col-md-8">
+        <div class="input-group mb-3">
           <input type="email" class="form-control newsletter-input" placeholder="Enter your email">
-          <button class="btn newsletter-btn ms-2">Subscribe</button>
+          <button class="btn newsletter-btn ms-2 btn-hover-effect">Subscribe</button>
         </div>
       </div>
     </div>
@@ -699,7 +1134,7 @@
     glare: true,
     "max-glare": 0.2
   });
-  
+
   // Navbar scroll effect
   window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
@@ -771,6 +1206,23 @@
   if (typeof THREE !== 'undefined') {
     initThreeJS();
   }
+  
+  // Product selection functionality
+  document.querySelectorAll('.product-selection-item').forEach(item => {
+    item.addEventListener('click', function() {
+      // Remove active class from all items
+      document.querySelectorAll('.product-selection-item').forEach(i => {
+        i.classList.remove('active');
+      });
+      
+      // Add active class to clicked item
+      this.classList.add('active');
+      
+      // Here you would typically update the main product image and details
+      const productName = this.querySelector('p').textContent;
+      console.log(`Selected product: ${productName}`);
+    });
+  });
 </script>
 </body>
 </html>
